@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form</title>
+    <style>
+        .form-container {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        button {
+            margin-right: 10px;
+        }
+        .saved-view {
+            border: 1px solid #000;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .saved-view .title {
+            font-weight: bold;
+        }
+        .action-buttons {
+            margin-top: 10px;
+        }
+        .add-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .add-buttons button {
+            padding: 10px 20px;
+            background-color: orange;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .add-buttons button:hover {
+            background-color: darkorange;
+        }
+    </style>
+</head>
+<body>
+    <div id="forms-wrapper">
+        <div class="form-container">
+            <form action="#" name="submit-to-google-sheet" id="dataForm">
+                <div class="form-group">
+                    <label for="name">НАЗВА ЗАКЛАДУ</label>
+                    <input type="text" id="name" name="Заведение">
+                </div>
+                <div class="form-group">
+                    <label for="name">Прізвище, ім'я</label>
+                    <input type="text" id="name" name="Имя Фамилия">
+                </div>
+                <div class="form-group">
+                    <label for="dropdown">Стать</label>
+                    <select id="dropdown" name="Стать">
+                        <option value=""></option>
+                        <option value="Чол">Чол</option>
+                        <option value="Жін">Жін</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="input1">Виріб</label>
+                    <select id="input1" name="Изд">
+                      <option value=""></option>
+                      <option value="Китель">Китель</option>
+                      <option value="Брюки">Брюки</option>
+                      <option value="Фартух">Фартух</option>
+                      <option value="Головной убор">Головной убор</option>
+                      <option value="Поло Футболка">Поло Футболка</option>
+                      <option value="Свитшот">Свитшот</option>
+                      <option value="Носки">Носки</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="input2">Назва виробу</label>
+                    <select id="input2" name="Название изд">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="input3">Колір</label>
+                    <select id="input3" name="Цвет изд">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Кількість виробів</label>
+                    <input type="number" id="quantity" name="Кол изд" value="">
+                </div>
+                <div class="form-group">
+                    <label for="input4">Розмір виробу, якщо точно його знаєте</label>
+                    <select id="input4" name="РР изд, (если есть)">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="chest">Якщо розмір не знаєте, обхват грудей/стегон, см</label>
+                    <input type="number" id="chest" name="ОГ/ОБ" value="">
+                </div>
+                <div class="form-group">
+                    <label for="logo">Кількість вишивок логотипу на виробі</label>
+                    <input type="number" id="logo" name="Кол выш лого" value="">
+                </div>
+                <div class="form-group">
+                    <label for="name-embroidery">Кількість вишивки імені на кітелі</label>
+                    <input type="number" id="name-embroidery" name="Кол выш имен" value="">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="add-buttons">
+        <button id="addForm">Добавити людину</button>
+        <button id="saveData">Сохранить</button>
+    </div>
+
+    <div id="saved-view"></div>
+
+<script src="./script.js"></script>
+</body>
+</html>

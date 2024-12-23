@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма замовлення</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .form-container h1 {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group button {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group button {
+            background-color: #d35400;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form action="#" name="submit-to-google-sheet" id="dataForm">
+            <div class="form-group">
+                <label for="name">НАЗВА ЗАКЛАДУ</label>
+                <input type="text" id="name" name="Заведение">
+            </div>
+            <div class="form-group">
+                <label for="name">Прізвище, ім'я</label>
+                <input type="text" id="name" name="Имя Фамилия">
+            </div>
+
+            <div class="form-group">
+                <label for="dropdown">Стать</label>
+                <select id="dropdown" name="Стать">
+                    <option value=""></option>
+                    <option value="Чол">Чол</option>
+                    <option value="Жін">Жін</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="input1">Виріб</label>
+                <select id="input1" name="Изд">
+                    <option value=""></option>
+                    <option value="Китель">Китель</option>
+                    <option value="Брюки">Брюки</option>
+                    <option value="Фартух">Фартух</option>
+                    <option value="Головной убор">Головной убор</option>
+                    <option value="Поло Футболка">Поло Футболка</option>
+                    <option value="Свитшот">Свитшот</option>
+                    <option value="Носки">Носки</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="input2">Назва виробу</label>
+                <select id="input2" name="Название изд">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="input3">Колір</label>
+                <select id="input3" name="Цвет изд">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Кількість виробів</label>
+                <input type="number" id="quantity" name="Кол изд" value="">
+            </div>
+
+            <div class="form-group">
+                <label for="input4">Розмір виробу, якщо точно його знаєте</label>
+                <select id="input4" name="РР изд, (если есть)">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="chest">Якщо розмір не знаєте, обхват грудей/стегон, см</label>
+                <input type="number" id="chest" name="ОГ/ОБ" value="">
+            </div>
+
+            <div class="form-group">
+                <label for="logo">Кількість вишивок логотипу на виробі</label>
+                <input type="number" id="logo" name="Кол выш лого" value="">
+            </div>
+
+            <div class="form-group">
+                <label for="name-embroidery">Кількість вишивки імені на кітелі</label>
+                <input type="number" id="name-embroidery" name="Кол выш имен" value="">
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Отправить</button>
+            </div>
+
+
+            <a href="https://docs.google.com/spreadsheets/d/1BLHTZf2c2NYyeh2gUCjTasoP-_oIz7hWxrDmPjN6klQ/edit?usp=sharing">Если хотите посмотреть, вот таблица с данными</a>
+            <span id="sendText"></span>
+        </form>
+    </div>
+
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwkA4Kq-74fsysdxqCnP8JQAhHZ1cbRAm3q6sL8RCR0icDbeUnUmJSYzWR1oXxks81u/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const sendText = document.getElementById('sendText')
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+    
+          const dropdown = document.getElementById('dropdown');
+          const selectedValue = dropdown.value;
+    
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response =>{
+              sendText.innerHTML = "Спасибо данные отправлены!"
+              setTimeout(function(){
+                  sendText.innerHTML = ""
+              }, 1000)
+              form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+
+        document.getElementById('input1').addEventListener('input', function () {
+      const input1 = document.getElementById('input1').value.toLowerCase();
+      const input2 = document.getElementById('input2');
+
+      // Очищаем старые значения
+      input2.innerHTML = '<option value="" selected disabled></option>';
+
+      if (input1 === 'китель') {
+        addOptions(input2, ['CLOVIS', 'WASHINGTON', 'ALICANTE', 'LAS VEGAS', 'MURANO', 'PORTLAND', 'MILAN', 'NORMAN', 'RIVERSIDE', 'FRANKFURT', 'DENVER', 'TEXAS', 'VENEZUELA', 'NAPOLI', 'SEATTLE', 'EUROPE', 'CAPRI', 'CONCORD', 'SPARTA', 'BRATISLAVA', 'MEXICO', 'FLORIDA', 'MOROCCO', 'TORONTO', 'INDIANA', 'SIDNEY', 'LOS ANGELES', 'NEBRASKA', 'SANTORINI']);
+      } else if (input1 === 'брюки') {
+        addOptions(input2, ['GENEVA', 'KANZAS', 'BREST', 'CARY', 'CHICO', 'BALTIMOR', 'BASEL', 'LINCOLN', 'ARIZONA', 'KENT', 'TURIN', 'BOGOTA']);
+      } else if (input1 === 'фартух') {
+        addOptions(input2, ['MONACO', 'TENERIFE', 'SAVANNA', 'SPARKS', 'ALASKA', 'BEND', 'VANCOUVER', 'ASTANA', 'OREGON', 'BOSTON', 'ROME', 'VIRGINIA', 'DETROIT', 'LONDON', 'MANILA', 'MONTERREY', 'VILNIUS', 'COLOMBO', 'OTTAWA', 'SIENA', 'COPENHAGEN']);
+      } else if (input1 === 'головной убор') {
+        addOptions(input2, ['Шапка ALABAMA', 'Повязка SOFIA', 'Бандана DUBAI', 'Кепка MADAGASKAR', 'Кепка GRANADA', 'Кепка PALERMO', 'Кепка RIMINI', 'Головний убір-панама HONG KONG', 'Таблетка KABUL', 'Гриб стандарт PARIS']);
+      } else if (input1 === 'поло футболка') {
+        addOptions(input2, ['Футболка NEVADA', 'Поло NEW YORK', 'Футболка DUBLIN']);
+      } else if (input1 === 'свитшот') {
+        addOptions(input2, ['MICHIGAN']);
+      } else if (input1 === 'носки') {
+        addOptions(input2, ['Набір шкарпеток LION', 'Набір шкарпеток ABRIKOS', 'Набір шкарпеток BLACK', 'Набір шкарпеток GRAY', 'Набір шкарпеток SPIDER', 'Набір шкарпеток TATTOO', 'Набір шкарпеток DEMON', 'Набір шкарпеток EGG', 'Набір шкарпеток MUHOMOR', 'Набір шкарпеток RACCON']);
+      }
+
+      if (input1 === 'китель') {
+        addOptions(input3, ['Бежевый', 'Белый', 'Голубой', 'Светло-серый', 'Серый', 'Синий', 'Хаки', 'Черный'])
+      } else if (input1 === 'брюки') {
+        addOptions(input3, ['Бежевый', 'Клетка', 'Меланж', 'Оранжевый', 'Серый', 'Синий', 'Хаки', 'Черный'])
+      } else if (input1 === 'фартух') {
+        addOptions(input3, ['Бежевый', 'Белый', 'Голубой', 'Светло-серый', 'Сине-серый', 'Синий', 'Темный беж', 'Хаки', 'Черный', 'Черно-серый'])
+      } else if (input1 === 'головной убор') {
+        addOptions(input3, ['Бежевый', 'Белый', 'Светло-серый', 'Черный', 'Красный', 'Желтый', 'Серый', 'Пудра', 'Меланж', 'Голубой', 'Зеленый', 'Оранжевый', 'Розовый', 'Cиний', 'Темный беж', 'Хаки'])
+      } else if (input1 === 'поло футболка') {
+        addOptions(input3, ['Белый', 'Черный', 'Хаки', 'Серый'])
+      } else if (input1 === 'свитшот') {
+        addOptions(input3, ['Хаки', 'Черный', 'Светло-серый'])
+      } else if (input1 === 'носки') {
+        addOptions(input3, ['0'])
+      }
+
+      if (input1 === 'носки') {
+        addOptions(input4, ['36-40', '41-45'])
+      } else if (input1 === 'поло футболка') {
+        addOptions(input4, ['0', 'XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL'])
+      } else if (input1 === 'свитшот') {
+        addOptions(input4, ['0', 'XS', 'S', 'M', 'L', 'XL', '2XL'])
+      } else if (input1 === 'китель', 'брюки') {
+        addOptions(input4, ['0', '42', '44', '46', '48', '50', '52', '54', '56', '58', '60', '62'])
+      }
+      
+    });
+
+    // Функция для добавления вариантов в select
+    function addOptions(select, options) {
+      options.forEach(option => {
+        const opt = document.createElement('option');
+        opt.value = option;
+        opt.textContent = option;
+        select.appendChild(opt);
+      });
+    }
+      </script>
+</body>
+</html>

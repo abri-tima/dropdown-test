@@ -1,0 +1,171 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    align-items: center;
+  }
+
+  .form-personal {
+    width: 400px;
+    background: rgba(0, 0, 0,.8);
+    padding: 40px;
+    border-radius: 30px;
+  }
+
+  .form-personal input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 50px;
+    outline: 0.7mm solid #ee6700;
+  }
+
+  .form-personal button {
+    width: 100%;
+    height: 35px;
+    outline: none;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  #sendText {
+    color: green;
+    margin-top: 15px;
+    display: block;
+    text-align: center;
+  }
+
+
+  .center {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
+  .dropdown-status {
+    height: fit-content;
+    box-sizing: border-box;
+    position: relative;
+  }
+  .dropdown-color {
+    height: fit-content;
+    box-sizing: border-box;
+    position: relative;
+  }
+  .input-box {
+    background-color: #fff;
+    width: 30%;
+    height: 40px;
+    box-sizing: border-box;
+    outline: 0.3mm solid rgba(249, 249, 249, 0.984);
+    padding: 10px 15px;
+    font-family: poppins;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+  }
+  .input-box::before {
+    content: "expand_more";
+    font-family: "Material Icons";
+    position: absolute;
+    font-size: 18px;
+    top: 50%;
+    right: 15px;
+    transform: translate(0, -50%);
+    width: fit-content;
+    height: fit-content;
+  }
+  .input-box.open::before {
+    content: "expand_less";
+  }
+  .input-box:empty::after {
+    content: "Стать";
+    color: rgba(0, 0, 0, 0.992);
+  }
+  .list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 30%;
+    height: fit-content;
+    background: rgb(255, 255, 255);
+    margin-top: 10px;
+    border-radius: 2mm;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    max-height: 0;
+    transition: 0.25s ease-out;
+  }
+  .list input {
+    display: none;
+  }
+  .list label {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: poppins;
+    font-size: 14px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+  }
+  .list label .material-icons-outlined,
+  .input-box .material-icons-outlined {
+    margin-right: 5px;
+    font-size: 22px;
+  }
+  .list label:hover {
+    background: rgba(168, 168, 168, 0.862);
+  }
+  input:checked + label {
+    color: rgb(0, 0, 0);
+    background: rgb(255, 255, 255);
+  }
+  input:checked + label::before {
+    content: "done";
+    font-family: "Material Icons";
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translate(0, -50%);
+    font-size: 18px;
+  }
+  .open {
+    outline: 0.7mm solid #ee6700;
+  }
+  .title {
+    font-family: poppins;
+    font-size: small;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .search-box {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 8px;
+  }
+  #search {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    border-radius: 1mm;
+    border: none;
+    outline: 0.3mm solid rgba(0, 225, 255, 0.801);
+    font-family: poppins;
+  }
+  #search:focus {
+    outline: 0.5mm solid rgb(241, 0, 0);
+  }
